@@ -1,6 +1,6 @@
 var socket = new WebSocket('ws://localhost:8080/ws');
 
-let connect = () => {
+let connect = (cb: (arg0: MessageEvent<any>) => void) => {
     console.log("Attempting to connect...");
 
     socket.onopen = () => {
@@ -13,6 +13,7 @@ let connect = () => {
     
     socket.onmessage = (msg) => {
         console.log(msg);
+        cb(msg);
     };
 
     socket.onerror = (error) => {
